@@ -16,14 +16,11 @@ object WordCount {
   val words = input.flatMap(line => line.split(" "))
   val counts = words.map(word => (word, 1)).reduceByKey(_ + _)
   //  counts.saveAsTextFile("wordcount")
-  private val contS: Long = counts.count()
-  println(contS)
   private val tuples: Array[(String, Int)] = counts.collect()
-
+  counts.saveAsSequenceFile("d:/wc")
   tuples.foreach(t => {
     println(t._1 + "的个数是" + t._2)
   })
-
   def main(args: Array[String]): Unit = {
 
   }
